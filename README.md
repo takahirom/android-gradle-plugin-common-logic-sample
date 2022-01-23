@@ -1,4 +1,4 @@
-Precompiled script plugins and share and customize Gradle sample
+A sample project to use Precompiled script plugin for sharing gradle logic
 
 https://docs.gradle.org/current/userguide/custom_plugins.html#sec:precompiled_plugins
 
