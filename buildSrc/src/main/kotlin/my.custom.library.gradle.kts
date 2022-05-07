@@ -3,13 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-abstract class MyCustomPluginExtension {
-    abstract val useCompose: Property<Boolean>
-
-    init {
-        useCompose.convention(false)
-    }
-}
+open class MyCustomPluginExtension @JvmOverloads constructor(
+    var useCompose: Boolean = false
+)
 
 val extension = project.extensions.create<MyCustomPluginExtension>("myCustomExtension")
 
@@ -40,9 +36,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = extension.useCompose.get()
-    }
 }
 
 dependencies {
@@ -52,4 +45,12 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+}
+
+// https://developer.android.com/studio/build/extend-agp
+androidComponents.finalizeDsl { androidExtension ->
+    androidExtension.buildFeatures {
+        println("extension.useCompose:" + extension.useCompose)
+        compose = extension.useCompose
+    }
 }

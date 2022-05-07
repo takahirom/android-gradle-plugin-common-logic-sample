@@ -3,5 +3,5 @@ plugins {
 }
 
 myCustomExtension {
-    useCompose.set(true)
+    useCompose = true
 }
