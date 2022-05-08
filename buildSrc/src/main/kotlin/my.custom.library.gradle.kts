@@ -3,12 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 
-open class MyCustomPluginExtension @JvmOverloads constructor(
-    var useCompose: Boolean = false
-)
-
-val extension = project.extensions.create<MyCustomPluginExtension>("myCustomExtension")
-
 android {
     compileSdk = 32
 
@@ -46,6 +40,12 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
 }
+
+open class MyCustomPluginExtension @JvmOverloads constructor(
+    var useCompose: Boolean = false
+)
+
+val extension = project.extensions.create<MyCustomPluginExtension>("myCustomExtension")
 
 // https://developer.android.com/studio/build/extend-agp
 androidComponents.finalizeDsl { androidExtension ->
